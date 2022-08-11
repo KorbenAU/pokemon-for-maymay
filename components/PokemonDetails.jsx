@@ -54,10 +54,12 @@ const PokemonDetails = ({entry}) => {
                                 <Divider/>
                                 {
                                     detail.stats.map(stat => (
-                                        <Flex alignItems={"center"}>
+                                        <Flex alignItems={"center"} key={stat.stat.name}>
                                             <Text mr={5}>{stat.stat.name}</Text>
                                             <Spacer/>
-                                            <Box width={"200px"}><Progress size="md" value={stat.base_stat} min={0} max={150}/></Box>
+                                            <Box width={"200px"}>
+                                                <Progress size="md" value={stat.base_stat} min={0} max={150}/>
+                                            </Box>
                                             <Text ml={2}>{stat.base_stat}</Text>
                                         </Flex>
                                     ))
