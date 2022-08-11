@@ -1,12 +1,28 @@
 import React, {useEffect, useState} from "react";
 import Section from "./Section";
-import {Box, Divider, Flex, Image, Progress, Spacer, Stack, Text} from "@chakra-ui/react";
+import {
+    Box,
+    Button,
+    Divider,
+    Flex,
+    Heading,
+    Image, List, ListIcon, ListItem,
+    Progress,
+    SimpleGrid,
+    Spacer,
+    Stack, Text
+} from "@chakra-ui/react";
 import {getEntityByUrl} from "../API";
+import PokemonEntryGridItem from "./PokemonEntryGridItem";
+import {capitalizeFirstLetter} from "../Utils/Utils";
+import {CloseIcon, SpinnerIcon, StarIcon, TriangleUpIcon} from "@chakra-ui/icons";
 
-const PokemonDetails = ({entry}) => {
+const PokemonDetails = ({entry, onCancel}) => {
     const [detail, setDetail] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
+    const [species, setSpecies] = useState();
+    const [varieties, setVarieties] = useState([]);
 
     const fetchDetails = async () => {
         setIsLoading(true);
@@ -18,7 +34,29 @@ const PokemonDetails = ({entry}) => {
         const pokeId = pokeIds[pokeIds.length - 2];
         setImageUrl(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokeId}.svg`);
 
+        const species = await getEntityByUrl(pokemon.species.url);
+        setSpecies(species);
+
+        const {varieties} = species;
+        const vIds = varieties.map(v => {
+            const pokeIds = v.pokemon.url.split("/");
+            const pokeId = pokeIds[pokeIds.length - 2];
+            return {
+                name: v.pokemon.name,
+                id: pokeId
+            };
+        });
+
+        setVarieties(vIds);
         setIsLoading(false);
+    };
+
+    const getDescription = (species) => {
+        var textList = species.flavor_text_entries
+            .filter(item => item.language.name == "en")
+            .map(item => item.flavor_text);
+
+        return textList.filter((item, index) => textList.indexOf(item) === index);
     };
 
     useEffect(() => {
@@ -26,9 +64,19 @@ const PokemonDetails = ({entry}) => {
     }, [entry]);
 
     return (
-        <>
+        <Section>
             {detail && <Section delay={0.3}>
                 <Flex direction={"column"}>
+                    <Box mt={20} mr={["0", "0", "0"]}>
+                        <Flex alignItems={"center"} justify={"space-between"}>
+                            <Heading>{capitalizeFirstLetter(entry.name)}</Heading>
+                            <Button rightIcon={<CloseIcon/>}
+                                    colorScheme="teal" onClick={onCancel}>
+                                Go back
+                            </Button>
+                        </Flex>
+                    </Box>
+                    <Divider my={5}/>
                     <Box>
                         <Flex direction={{base: "column", md: "row"}}
                               alignItems={"center"}
@@ -39,6 +87,7 @@ const PokemonDetails = ({entry}) => {
                                 src={imageUrl}
                                 alt={entry.name}
                                 mb={["10", "10", "0"]}
+                                mt={["0", "0", "0"]}
                             />
                             <Stack spacing={3}>
                                 <Flex alignItems={"center"}>
@@ -67,9 +116,59 @@ const PokemonDetails = ({entry}) => {
                             </Stack>
                         </Flex>
                     </Box>
+                    <Divider my={5}/>
+                    <Box>
+                        {species && <Text>
+                            {
+                                getDescription(species)
+                                    .map(text => {
+                                        return text + " ";
+                                    })
+                            }
+                        </Text>}
+                    </Box>
+                    <Divider my={5}/>
+                    <Box>
+                        <Heading>Information</Heading>
+                        <List spacing={3} mt={5} fontSize={"1.2em"}>
+                            <ListItem>
+                                <ListIcon as={StarIcon} color="teal"/>
+                                Types of this Pokemon:
+                                {detail.types.map(type => (
+                                    " " + type.type.name + " "
+                                ))}
+                            </ListItem>
+                            <ListItem>
+                                <ListIcon as={TriangleUpIcon} color="teal"/>
+                                It's habitat is {species ? species.habitat.name : ""}
+                            </ListItem>
+                            <ListItem>
+                                <ListIcon as={SpinnerIcon} color="teal"/>
+                                It's growth rate is {species ? species.growth_rate.name : ""}
+                            </ListItem>
+                        </List>
+                    </Box>
+                    <Divider my={5}/>
+                    <Box>
+                        <Heading>Species</Heading>
+                    </Box>
+                    <Box>
+                        <SimpleGrid columns={[2, 2, 3]} gap={6} mt={10}>
+                            {varieties.map(v => {
+                                const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${v.id}.png`;
+                                return (
+                                    <Section key={v.id}>
+                                        <PokemonEntryGridItem
+                                            name={v.name}
+                                            imageUrl={image}/>
+                                    </Section>
+                                );
+                            })}
+                        </SimpleGrid>
+                    </Box>
                 </Flex>
             </Section>}
-        </>
+        </Section>
     );
 };
 

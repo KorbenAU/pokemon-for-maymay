@@ -1,5 +1,6 @@
 import React from "react";
-import {Box, Divider, Flex, Heading, Image, Spacer, useColorModeValue} from "@chakra-ui/react";
+import {Box, Divider, Flex, Heading, Image, useColorModeValue} from "@chakra-ui/react";
+import PokeBallImage from "../public/image/pokemon-go.png";
 
 const PokemonEntryGridItem = ({name, imageUrl, onClick}) => {
     return (
@@ -22,8 +23,7 @@ const PokemonEntryGridItem = ({name, imageUrl, onClick}) => {
              px={4}
              pt={2}
              pb={4}
-             onClick={onClick}
-        >
+             onClick={onClick}>
             <Flex direction={"column"} h={"100%"}>
                 <Box>
                     <Heading as={"h2"} mt={2} fontSize={19}>

@@ -1,20 +1,11 @@
-import {getPokemonEntries, getPokemonEntriesWithUrl} from "../API";
-import {Button, Flex, SimpleGrid, Spacer, Text, useDisclosure} from "@chakra-ui/react";
+import {getPokemonEntries} from "../API";
+import {Button, Flex, SimpleGrid, Spacer, Text} from "@chakra-ui/react";
 import {capitalizeFirstLetter} from "../Utils/Utils";
 import {useEffect, useState} from "react";
 import Section from "../components/Section";
 import PokemonEntryGridItem from "../components/PokemonEntryGridItem";
 import {ChevronLeftIcon, ChevronRightIcon} from "@chakra-ui/icons";
 import PokemonDetails from "../components/PokemonDetails";
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-} from "@chakra-ui/react";
 
 export default function Pokemon() {
 
@@ -23,8 +14,6 @@ export default function Pokemon() {
     const [isLoading, setLoading] = useState(false);
     const [limit, setLimit] = useState(12);
     const [selectedPokemon, setSelectedPokemon] = useState();
-
-    const {isOpen, onOpen, onClose} = useDisclosure();
 
     const fetchEntries = async () => {
         setLoading(true);
@@ -35,7 +24,6 @@ export default function Pokemon() {
 
     const handlePokemonCardClick = (entry) => {
         setSelectedPokemon(entry);
-        onOpen();
     };
 
     const handleNextClick = async () => {
@@ -46,6 +34,10 @@ export default function Pokemon() {
     const handlePrevClick = async () => {
         const current = offSet - limit;
         setOffSet(current);
+    };
+
+    const handleCancelClick = () => {
+        setSelectedPokemon(null);
     };
 
     useEffect(() => {
@@ -74,7 +66,7 @@ export default function Pokemon() {
                 </SimpleGrid>
                 <Flex alignItems={"center"}>
                     <Text>
-                        {offSet}/{data.count}
+                        {offSet + limit}/{data.count}
                     </Text>
                     <Spacer/>
                     {data.previous && <Button mr={2} leftIcon={<ChevronLeftIcon/>}
@@ -88,34 +80,13 @@ export default function Pokemon() {
         </Section>
     );
 
-    const showPokemonDetails = (entry) => {
-        return <PokemonDetails entry={entry}/>;
+    const showPokemonDetails = () => {
+        return <PokemonDetails onCancel={handleCancelClick} entry={selectedPokemon}/>;
     };
 
     return (
         <>
-            {showPokemonList()}
-            <Modal
-                onClose={onClose}
-                isOpen={isOpen}
-                size={["full", "full", "xl"]}
-                isCentered
-
-            >
-                <ModalOverlay backdropBlur="2px"
-                />
-                <ModalContent>
-                    <ModalHeader>{capitalizeFirstLetter(selectedPokemon?.name||"null")}</ModalHeader>
-                    <ModalCloseButton/>
-                    <ModalBody>
-                        <PokemonDetails entry={selectedPokemon}/>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
+            {selectedPokemon ? showPokemonDetails() : showPokemonList()}
         </>
-    )
-        ;
+    );
 }
