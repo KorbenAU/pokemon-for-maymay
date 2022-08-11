@@ -1,5 +1,5 @@
 import {getRandomPokemon} from "../API";
-import {Flex, Spacer, Text} from "@chakra-ui/react";
+import {Flex, Text} from "@chakra-ui/react";
 import Image from "next/image";
 import {capitalizeFirstLetter} from "../Utils/Utils";
 
@@ -14,8 +14,8 @@ export default function Home({pokemon}) {
             </Flex>
 
             <Flex align="center" justify="center">
-                <Image height={250}
-                       width={250}
+                <Image height={350}
+                       width={350}
                        src={sprites["other"]["official-artwork"]["front_default"] || sprites["front_default"]}
                        alt={"Pokemon Avatar"}
                 />
@@ -31,6 +31,6 @@ export async function getStaticProps() {
         props: {
             pokemon: pokemon
         },
-        revalidate: 1,
+        revalidate: 10,
     };
 }

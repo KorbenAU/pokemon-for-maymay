@@ -104,7 +104,9 @@ const PokemonDetails = ({entry, onCancel}) => {
                                 {
                                     detail.stats.map(stat => (
                                         <Flex alignItems={"center"} key={stat.stat.name}>
-                                            <Text mr={5}>{stat.stat.name}</Text>
+                                            <Box width={"150px"}>
+                                                <Text mr={5}>{stat.stat.name}</Text>
+                                            </Box>
                                             <Spacer/>
                                             <Box width={"200px"}>
                                                 <Progress size="md" value={stat.base_stat} min={0} max={150}/>
@@ -140,11 +142,11 @@ const PokemonDetails = ({entry, onCancel}) => {
                             </ListItem>
                             <ListItem>
                                 <ListIcon as={TriangleUpIcon} color="teal"/>
-                                It's habitat is {species ? species.habitat.name : ""}
+                                {"It\'s habitat is"} {species ? species.habitat.name : ""}
                             </ListItem>
                             <ListItem>
                                 <ListIcon as={SpinnerIcon} color="teal"/>
-                                It's growth rate is {species ? species.growth_rate.name : ""}
+                                {"It\'s growth rate is"} {species ? species.growth_rate.name : ""}
                             </ListItem>
                         </List>
                     </Box>
