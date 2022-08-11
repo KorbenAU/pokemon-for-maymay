@@ -47,7 +47,19 @@ export default function Pokemon() {
     const showPokemonList = () => (
         <Section>
             {!isLoading && data && <Section delay={0.1}>
-                <SimpleGrid columns={[2, 2, 3]} gap={6} mt={10}>
+                <Flex alignItems={"center"} mt={10}>
+                    <Text>
+                        {offSet + limit}/{data.count}
+                    </Text>
+                    <Spacer/>
+                    {data.previous && <Button mr={2} leftIcon={<ChevronLeftIcon/>}
+                                              colorScheme="teal" onClick={handlePrevClick}>
+                    </Button>}
+                    {data.next && <Button rightIcon={<ChevronRightIcon/>}
+                                          colorScheme="teal" onClick={handleNextClick}>
+                    </Button>}
+                </Flex>
+                <SimpleGrid columns={[2, 2, 3]} gap={6} my={5}>
                     {
                         data.results.map(entry => {
                             const pokeIds = entry.url.split("/");

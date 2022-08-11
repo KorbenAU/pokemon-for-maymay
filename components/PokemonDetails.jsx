@@ -166,6 +166,15 @@ const PokemonDetails = ({entry, onCancel}) => {
                             })}
                         </SimpleGrid>
                     </Box>
+                    <Box mt={10} mr={["0", "0", "0"]}>
+                        <Flex alignItems={"center"} justify={"space-between"}>
+                            <Spacer/>
+                            <Button rightIcon={<CloseIcon/>}
+                                    colorScheme="teal" onClick={onCancel}>
+                                Go back
+                            </Button>
+                        </Flex>
+                    </Box>
                 </Flex>
             </Section>}
         </Section>
