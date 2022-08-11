@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Container, Spacer} from "@chakra-ui/react";
+import {Box, Container} from "@chakra-ui/react";
 import Head from "next/head";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
