@@ -5,7 +5,7 @@ const styles = {
     global: props => ({
         body: {
             bg: mode("#f0e7db", "#202023")(props)
-        }
+        },
     })
 };
 
@@ -27,6 +27,16 @@ const components = {
         baseStyle: props => ({
             color: mode("#3d7aed", "#ff63c3")(props),
             textUnderlineOffset: 3
+        })
+    },
+    Modal: {
+        baseStyle: (props) => ({
+            dialog: {
+                maxWidth: ["95%", "95%", "95%"],
+                minWidth: "60%",
+                minHeight: "50%",
+                bg: mode("#f0e7db", "#202023")(props)
+            }
         })
     }
 };

@@ -12,6 +12,12 @@ export const getPokemonEntriesWithUrl = async (url) => {
     return res.json();
 };
 
+export const getEntityByUrl = async (url) => {
+    const res = await fetch(url);
+
+    return res.json();
+};
+
 export const getRandomPokemon = async () => {
     const entries = await getPokemonEntries(0, 2000);
     const {results} = entries;

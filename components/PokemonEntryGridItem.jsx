@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, Divider, Flex, Heading, Image, Spacer, useColorModeValue} from "@chakra-ui/react";
 
-const PokemonEntryGridItem = ({name, imageUrl}) => {
+const PokemonEntryGridItem = ({name, imageUrl, onClick}) => {
     return (
         <Box w={"100%"}
              _hover={useColorModeValue({
@@ -22,6 +22,7 @@ const PokemonEntryGridItem = ({name, imageUrl}) => {
              px={4}
              pt={2}
              pb={4}
+             onClick={onClick}
         >
             <Flex direction={"column"} h={"100%"}>
                 <Box>
