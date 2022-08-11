@@ -1,5 +1,5 @@
-import {getPokemon, pokemonImageURL} from "../API";
-import {Box, Container, Flex, Text} from "@chakra-ui/react";
+import {getRandomPokemon} from "../API";
+import {Flex, Spacer, Text} from "@chakra-ui/react";
 import Image from "next/image";
 import {capitalizeFirstLetter} from "../Utils/Utils";
 
@@ -9,26 +9,23 @@ export default function Home({pokemon}) {
 
     return (
         <>
-            <Flex align="center" justify="center" my={'2em'}>
-                <Text fontSize='2em'>Hey Maymay, This is {capitalizeFirstLetter(name)}!</Text>
+            <Flex align="center" justify="center" my={"2em"}>
+                <Text fontSize="2em">Hey Maymay, This is {capitalizeFirstLetter(name)}!</Text>
             </Flex>
 
             <Flex align="center" justify="center">
                 <Image height={250}
                        width={250}
-                       src={sprites.other.dream_world.front_default}
+                       src={sprites["other"]["official-artwork"]["front_default"] || sprites["front_default"]}
                        alt={"Pokemon Avatar"}
                 />
             </Flex>
         </>
-    )
-        ;
+    );
 }
 
 export async function getStaticProps() {
-
-    const randomId = Math.floor(Math.random() * 1154) + 1;
-    const pokemon = await getPokemon(randomId);
+    const pokemon = await getRandomPokemon();
 
     return {
         props: {

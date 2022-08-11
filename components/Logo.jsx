@@ -19,7 +19,7 @@ const LogoBox = styled.span`
 `;
 
 const Logo = () => {
-    const footPrintImg = `/image/pokemon-go.png`;
+    const footPrintImg = `/image/Poke_Ball.webp`;
 
     return (
         <Link href={"/"}>
