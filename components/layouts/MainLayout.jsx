@@ -1,8 +1,8 @@
 import React from "react";
 import {Box, Container} from "@chakra-ui/react";
 import Head from "next/head";
-import Navbar from "../Navbar";
-import Footer from "../Footer";
+import Navbar from "../Navbar.jsx";
+import Footer from "../Footer.jsx";
 
 const MainLayout = ({children, router}) => {
     return (
