@@ -6,11 +6,11 @@ const PokemonEntryGridItem = ({name, imageUrl, backupImage, onClick}) => {
         <Box w={"100%"}
              _hover={useColorModeValue({
                  cursor: "pointer",
-                 "box-shadow": "rgba(100, 100, 111, 0.5) 0px 7px 29px 0px",
+                 boxShadow: "rgba(100, 100, 111, 0.5) 0px 7px 29px 0px",
                  transform: "scale(1.05)"
              }, {
                  cursor: "pointer",
-                 "box-shadow": "rgba(100, 100, 111, 0.9) 0px 7px 29px 0px",
+                 boxShadow: "rgba(100, 100, 111, 0.9) 0px 7px 29px 0px",
                  transform: "scale(1.05)"
              })}
              transition={"all .3s ease-in-out"}

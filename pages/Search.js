@@ -135,15 +135,11 @@ const Search = (props) => {
                                                          p={1}
                                                          px={3}
                                                          onClick={() => handleSelectedPokemon(e)}
-                                                         _hover={useColorModeValue({
+                                                         _hover={{
                                                              cursor: "pointer",
-                                                             "box-shadow": "rgba(100, 100, 111, 0.5) 0px 7px 29px 0px",
+                                                             boxShadow: "rgba(100, 100, 111, 0.5) 0px 7px 29px 0px",
                                                              transform: "scale(1.05)"
-                                                         }, {
-                                                             cursor: "pointer",
-                                                             "box-shadow": "rgba(100, 100, 111, 0.9) 0px 7px 29px 0px",
-                                                             transform: "scale(1.05)"
-                                                         })}
+                                                         }}
                                                          transition={"all .2s ease-in-out"}>
                                                         <Text>{e.name}</Text>
                                                     </Box>
