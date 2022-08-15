@@ -93,33 +93,35 @@ const PokemonDetails = ({entry, onCancel}) => {
                                 mb={["10", "10", "0"]}
                                 mt={["0", "0", "0"]}
                             />
-                            <Stack spacing={3}>
-                                <Flex alignItems={"center"}>
-                                    <Text>Height</Text>
-                                    <Spacer/>
-                                    <Text>{detail.height} ft</Text>
-                                </Flex>
-                                <Flex alignItems={"center"}>
-                                    <Text>Weight</Text>
-                                    <Spacer/>
-                                    <Text>{detail.weight} kg</Text>
-                                </Flex>
-                                <Divider/>
-                                {
-                                    detail.stats.map(stat => (
-                                        <Flex alignItems={"center"} key={stat.stat.name}>
-                                            <Box width={"150px"}>
-                                                <Text mr={5}>{stat.stat.name}</Text>
-                                            </Box>
-                                            <Spacer/>
-                                            <Box width={"200px"}>
-                                                <Progress size="md" value={stat.base_stat} min={0} max={150}/>
-                                            </Box>
-                                            <Text ml={2}>{stat.base_stat}</Text>
-                                        </Flex>
-                                    ))
-                                }
-                            </Stack>
+                            <Box px={[2, 0, 0]}>
+                                <Stack spacing={3}>
+                                    <Flex alignItems={"center"}>
+                                        <Text>Height</Text>
+                                        <Spacer/>
+                                        <Text>{detail.height} ft</Text>
+                                    </Flex>
+                                    <Flex alignItems={"center"}>
+                                        <Text>Weight</Text>
+                                        <Spacer/>
+                                        <Text>{detail.weight} kg</Text>
+                                    </Flex>
+                                    <Divider/>
+                                    {
+                                        detail.stats.map(stat => (
+                                            <Flex alignItems={"center"} key={stat.stat.name}>
+                                                <Box width={"150px"}>
+                                                    <Text mr={5}>{stat.stat.name}</Text>
+                                                </Box>
+                                                <Spacer/>
+                                                <Box width={"200px"}>
+                                                    <Progress size="md" value={stat.base_stat} min={0} max={150}/>
+                                                </Box>
+                                                <Text ml={2}>{stat.base_stat}</Text>
+                                            </Flex>
+                                        ))
+                                    }
+                                </Stack>
+                            </Box>
                         </Flex>
                     </Box>
                     <Divider my={5}/>
