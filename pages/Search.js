@@ -111,7 +111,7 @@ const Search = (props) => {
                                 <Input
                                     pr="4.5rem"
                                     value={searchKey}
-                                    borderColor={useColorModeValue("whiteAlpha.800", "whiteAlpha.200")}
+                                    borderColor={"whiteAlpha.800"}
                                     type={"text"}
                                     placeholder="Pokemon name"
                                     onChange={(e) => handleSearchChange(e.target.value)}
