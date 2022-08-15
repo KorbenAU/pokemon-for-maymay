@@ -1,8 +1,7 @@
 import React from "react";
 import {Box, Divider, Flex, Heading, Image, useColorModeValue} from "@chakra-ui/react";
-import PokeBallImage from "../public/image/pokemon-go.png";
 
-const PokemonEntryGridItem = ({name, imageUrl, onClick}) => {
+const PokemonEntryGridItem = ({name, imageUrl, backupImage, onClick}) => {
     return (
         <Box w={"100%"}
              _hover={useColorModeValue({
@@ -33,6 +32,8 @@ const PokemonEntryGridItem = ({name, imageUrl, onClick}) => {
                 <Divider my={3}/>
                 <Box align={"center"} mt={3}>
                     <Image src={imageUrl}
+                           fallbackSrc={backupImage}
+                           fallbackStrategy={"onError"}
                            alt={name}
                            placeholder={"blur"}
                            height={"80px"}

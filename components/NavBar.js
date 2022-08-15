@@ -31,7 +31,7 @@ const LinkItem = ({href, path, children}) => {
     );
 };
 
-const Navbar = (props) => {
+const NavBar = (props) => {
     const {path} = props;
     return (
         <Box position={"fixed"}
@@ -65,8 +65,8 @@ const Navbar = (props) => {
                         Pokemon
                     </LinkItem>
 
-                    <LinkItem href={"/Ability"} path={path}>
-                        Ability
+                    <LinkItem href={"/Search"} path={path}>
+                        Search
                     </LinkItem>
                 </Stack>
 
@@ -81,22 +81,17 @@ const Navbar = (props) => {
                             <MenuList>
                                 <NextLink href={"/"} passHref>
                                     <MenuItem as={Link}>
-                                        About
+                                        Home
                                     </MenuItem>
                                 </NextLink>
-                                <NextLink href={"/works"} passHref>
+                                <NextLink href={"/Pokemon"} passHref>
                                     <MenuItem as={Link}>
-                                        works
+                                        Pokemon
                                     </MenuItem>
                                 </NextLink>
-                                <NextLink href={"/posts"} passHref>
+                                <NextLink href={"/Search"} passHref>
                                     <MenuItem as={Link}>
-                                        Posts
-                                    </MenuItem>
-                                </NextLink>
-                                <NextLink href={"/sourcecode"} passHref>
-                                    <MenuItem as={Link}>
-                                        View Source
+                                        Search
                                     </MenuItem>
                                 </NextLink>
                             </MenuList>
@@ -109,4 +104,4 @@ const Navbar = (props) => {
     );
 };
 
-export default Navbar;
+export default NavBar;

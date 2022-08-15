@@ -21,6 +21,7 @@ const PokemonDetails = ({entry, onCancel}) => {
     const [detail, setDetail] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
+    const [fallbackImage, setFallbackImage] = useState();
     const [species, setSpecies] = useState();
     const [varieties, setVarieties] = useState([]);
 
@@ -33,6 +34,7 @@ const PokemonDetails = ({entry, onCancel}) => {
         const pokeIds = entry.url.split("/");
         const pokeId = pokeIds[pokeIds.length - 2];
         setImageUrl(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokeId}.svg`);
+        setFallbackImage(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokeId}.png`);
 
         const species = await getEntityByUrl(pokemon.species.url);
         setSpecies(species);
@@ -85,6 +87,8 @@ const PokemonDetails = ({entry, onCancel}) => {
                                 boxSize={["50%", "50%", "30%"]}
                                 objectFit="cover"
                                 src={imageUrl}
+                                fallbackSrc={fallbackImage}
+                                fallbackStrategy={"onError"}
                                 alt={entry.name}
                                 mb={["10", "10", "0"]}
                                 mt={["0", "0", "0"]}
@@ -142,7 +146,7 @@ const PokemonDetails = ({entry, onCancel}) => {
                             </ListItem>
                             <ListItem>
                                 <ListIcon as={TriangleUpIcon} color="teal"/>
-                                {"It\'s habitat is"} {species ? species.habitat.name : ""}
+                                {"It\'s habitat is"} {species && species.habitat ? species.habitat.name : ""}
                             </ListItem>
                             <ListItem>
                                 <ListIcon as={SpinnerIcon} color="teal"/>
